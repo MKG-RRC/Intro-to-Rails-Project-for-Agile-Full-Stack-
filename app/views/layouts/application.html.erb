@@ -21,10 +21,11 @@
           <li class="nav-item"><%= link_to "About", about_path, class: "nav-link text-light px-2" %></li>
         </ul>
 
-        <%= form_with url: universities_path, method: :get, local: true, class: "d-flex ms-auto" do %>
-          <%= text_field_tag :q, params[:q], placeholder: "Search...", class: "form-control me-2" %>
-          <%= submit_tag "Search", class: "btn btn-outline-light" %>
-        <% end %>
+    <%= form_with url: universities_path, method: :get, local: true, class: "d-flex ms-auto" do %>
+      <%= text_field_tag :q, params[:q], placeholder: "Search universities...", class: "form-control me-2" %>
+      <%= submit_tag "Search", class: "btn btn-outline-light" %>
+    <% end %>
+
       </nav>
 
 

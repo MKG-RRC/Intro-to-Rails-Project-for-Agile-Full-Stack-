@@ -3,17 +3,18 @@ class UniversitiesController < ApplicationController
 
   # GET /universities or /universities.json
 def index
-  @universities = University.all
+  @q = params[:q]
 
-  # --- search logic ---
-  if params[:q].present?
-    query = "%#{params[:q]}%"
-    @universities = @universities.where("name LIKE ? OR country LIKE ?", query, query)
+  if @q.present?
+    query = "%#{@q.downcase}%"
+    @universities = University.where("LOWER(name) LIKE ? OR LOWER(country) LIKE ?", query, query)
+  else
+    @universities = University.all
   end
 
-  # --- pagination ---
   @universities = @universities.order(:name).page(params[:page]).per(10)
 end
+
 
 
   # GET /universities/1 or /universities/1.json

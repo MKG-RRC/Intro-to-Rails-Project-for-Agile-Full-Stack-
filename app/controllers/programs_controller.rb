@@ -2,9 +2,28 @@ class ProgramsController < ApplicationController
   before_action :set_program, only: %i[ show edit update destroy ]
 
   # GET /programs or /programs.json
-  def index
-    @programs = Program.includes(:university).order(:name).page(params[:page]).per(10)
+def index
+  @q = params[:q]
+  @university_id = params[:university_id]
+
+  @programs = Program.all
+
+  # Filter by university (hierarchical)
+  if @university_id.present? && @university_id != ""
+    @programs = @programs.where(university_id: @university_id)
   end
+
+  # Text search
+  if @q.present?
+    query = "%#{@q.downcase}%"
+    @programs = @programs.where("LOWER(name) LIKE ? OR LOWER(description) LIKE ?", query, query)
+  end
+
+  @programs = @programs.includes(:university).order(:name).page(params[:page]).per(10)
+  @universities = University.order(:name)
+end
+
+
 
 
   # GET /programs/1 or /programs/1.json
