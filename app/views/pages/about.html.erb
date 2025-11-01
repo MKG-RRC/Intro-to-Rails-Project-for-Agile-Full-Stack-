@@ -1,7 +1,13 @@
-<h1>About</h1>
-<p><strong>Dataset (1.1):</strong> This app uses Faker to generate sample data for Universities and their Programs.</p>
-<p><strong>ERD (1.2):</strong> One University has many Programs.</p>
-<ul>
-  <li>University: name, country</li>
-  <li>Program: name, description, university_id</li>
-</ul>
+<h2>Dataset Description (1.1)</h2>
+<p>
+  This application uses the <strong>Faker gem</strong> to generate data for three tables:
+  <em>Universities</em>, <em>Programs</em>, and <em>Departments</em>.
+  Each University has many Programs and many Departments.
+</p>
+
+<h2>Database ERD (1.2)</h2>
+<p>
+  The ERD below shows two one-to-many relationships:
+  University → Programs and University → Departments.
+</p>
+<%= image_tag "erd.png", alt: "Updated ERD Diagram", class: "img-fluid border rounded shadow-sm" %>

@@ -1,10 +1,10 @@
-<p style="color: green"><%= notice %></p>
-
-<%= render @university %>
-
-<div>
-  <%= link_to "Edit this university", edit_university_path(@university) %> |
-  <%= link_to "Back to universities", universities_path %>
-
-  <%= button_to "Destroy this university", @university, method: :delete %>
-</div>
+<h3 class="mt-4">Departments</h3>
+<% if @university.departments.any? %>
+  <ul class="list-group">
+    <% @university.departments.each do |d| %>
+      <li class="list-group-item"><%= d.name %></li>
+    <% end %>
+  </ul>
+<% else %>
+  <div class="alert alert-warning">No departments found for this university.</div>
+<% end %>

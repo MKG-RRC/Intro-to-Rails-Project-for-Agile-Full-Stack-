@@ -1,33 +1,45 @@
-# This file should ensure the existence of records required to run the application in every environment (production,
-# development, test). The code here should be idempotent so that it can be executed at any point in every environment.
-# The data can then be loaded with the bin/rails db:seed command (or created alongside the database with db:setup).
-#
-# Example:
-#
-#   ["Action", "Comedy", "Drama", "Horror"].each do |genre_name|
-#     MovieGenre.find_or_create_by!(name: genre_name)
-#   end
+# db/seeds.rb
+# ---------------------------------------------
+# This seed file populates the database with
+# Universities, their Programs, and Departments.
+# It uses Faker to generate realistic sample data.
+# ---------------------------------------------
 
 require "faker"
 
+# Clear existing data to avoid duplicates
+puts "Cleaning database..."
+Department.delete_all if defined?(Department)
 Program.delete_all
 University.delete_all
 
-puts "Seeding universities and programs..."
+puts "Seeding universities, programs, and departments..."
 
 20.times do
-  u = University.create!(
+  university = University.create!(
     name: Faker::University.name,
     country: Faker::Address.country
   )
 
+  # Seed Programs (one-to-many)
   10.times do
     Program.create!(
       name: Faker::Educator.course_name,
       description: Faker::Lorem.paragraph(sentence_count: 3),
-      university: u
+      university: university
+    )
+  end
+
+  # Seed Departments (second one-to-many association)
+  3.times do
+    Department.create!(
+      name: Faker::Educator.subject,
+      university: university
     )
   end
 end
 
-puts "Done! Universities: #{University.count}, Programs: #{Program.count}"
+puts "✅ Done!"
+puts "Universities: #{University.count}"
+puts "Programs: #{Program.count}"
+puts "Departments: #{Department.count if defined?(Department)}"
