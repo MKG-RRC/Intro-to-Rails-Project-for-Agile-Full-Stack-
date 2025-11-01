@@ -1,11 +1,58 @@
-<h3 class="mt-4">Instructors teaching at this University</h3>
-<% instructors = @university.programs.flat_map(&:instructors).uniq %>
-<% if instructors.any? %>
-  <ul class="list-group">
-    <% instructors.each do |inst| %>
-      <li class="list-group-item"><%= inst.name %> (<%= inst.email %>)</li>
-    <% end %>
-  </ul>
-<% else %>
-  <div class="alert alert-info">No instructors found for this university.</div>
-<% end %>
+<div class="container py-4">
+  <h1 class="fw-bold"><%= @university.name %></h1>
+  <p><strong>Country:</strong> <%= @university.country %></p>
+
+  <hr>
+
+  <!-- 🏛️ Departments Section -->
+  <h3 class="mt-4">Departments</h3>
+  <% if @university.departments.any? %>
+    <ul>
+      <% @university.departments.each do |d| %>
+        <li><%= link_to d.name, d, class: "text-decoration-none" %></li>
+      <% end %>
+    </ul>
+  <% else %>
+    <p class="text-muted">No departments found for this university.</p>
+  <% end %>
+
+  <!-- 🎓 Programs Section -->
+  <h3 class="mt-4">Programs</h3>
+  <% if @university.programs.any? %>
+    <ul>
+      <% @university.programs.each do |p| %>
+        <li><%= link_to p.name, p, class: "text-decoration-none" %></li>
+      <% end %>
+    </ul>
+  <% else %>
+    <p class="text-muted">No programs available for this university.</p>
+  <% end %>
+
+  <!-- 🌍 Map Visualization (Feature 3.6) -->
+  <div class="card mt-5 shadow-sm">
+    <div class="card-header bg-dark text-white">Map Location</div>
+    <div class="card-body text-center">
+      <% lat = @university.latitude.presence || 0 %>
+      <% lng = @university.longitude.presence || 0 %>
+
+      <% if lat != 0 && lng != 0 %>
+        <% # Mapbox Static Map API URL (pin marker + zoom + access token) %>
+        <% map_url = "https://api.mapbox.com/styles/v1/mapbox/streets-v11/static/pin-l+ff0000(#{lng},#{lat})/#{lng},#{lat},8/600x400?access_token=#{ENV['MAPBOX_ACCESS_TOKEN']}" %>
+        <%= image_tag map_url, alt: "Map showing #{@university.name}", class: "img-fluid rounded border shadow-sm" %>
+      <% else %>
+        <div class="text-muted py-5">
+          <p>📍 No coordinates available for this university.</p>
+        </div>
+      <% end %>
+
+      <p class="text-muted small mt-3">
+        Map generated from stored coordinates for: <strong><%= @university.name %></strong>
+      </p>
+    </div>
+  </div>
+
+  <!-- 🔙 Back Button -->
+  <div class="mt-4">
+    <%= link_to "← Back to Universities", universities_path, class: "btn btn-outline-secondary" %>
+  </div>
+</div>

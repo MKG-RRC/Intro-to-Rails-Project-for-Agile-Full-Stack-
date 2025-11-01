@@ -1,8 +1,5 @@
 <h1><%= @department.name %></h1>
 
-<p><strong>University:</strong>
-  <%= link_to @department.university.name, @department.university %>
-</p>
+<p><strong>University:</strong> <%= link_to @department.university.name, @department.university %></p>
 
-<%= link_to "Edit", edit_department_path(@department), class: "btn btn-secondary" %>
-<%= link_to "Back", departments_path, class: "btn btn-outline-dark" %>
+<%= link_to "Back to #{@department.university.name}", @department.university, class: "btn btn-outline-dark mt-3" %>

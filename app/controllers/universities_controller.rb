@@ -2,11 +2,19 @@ class UniversitiesController < ApplicationController
   before_action :set_university, only: %i[ show edit update destroy ]
 
   # GET /universities or /universities.json
-  def index
-      @universities = University.all
-      @universities = @universities.where("name LIKE ?", "%#{params[:q]}%") if params[:q].present?
-      @universities = @universities.order(:name).page(params[:page]).per(10)
+def index
+  @universities = University.all
+
+  # --- search logic ---
+  if params[:q].present?
+    query = "%#{params[:q]}%"
+    @universities = @universities.where("name LIKE ? OR country LIKE ?", query, query)
   end
+
+  # --- pagination ---
+  @universities = @universities.order(:name).page(params[:page]).per(10)
+end
+
 
   # GET /universities/1 or /universities/1.json
   def show

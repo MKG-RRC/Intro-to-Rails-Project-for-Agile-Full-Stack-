@@ -11,24 +11,22 @@
   </head>
 
   <body>
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-      <div class="container">
-        <a class="navbar-brand" href="<%= root_path %>">UniCatalog</a>
-        <div class="collapse navbar-collapse">
-          <ul class="navbar-nav me-auto">
-            <li class="nav-item"><%= link_to "Universities", universities_path, class: "nav-link" %></li>
-            <li class="nav-item"><%= link_to "Programs", programs_path, class: "nav-link" %></li>
-            <li class="nav-item"><%= link_to "Departments", departments_path, class: "nav-link" %></li>
-            <li class="nav-item"><%= link_to "About", about_path, class: "nav-link" %></li>
+      <nav class="navbar navbar-dark bg-dark px-3">
+        <%= link_to "UniCatalog", root_path, class: "navbar-brand fw-bold text-light" %>
 
-          </ul>
-          <%= form_with url: universities_path, method: :get, local: true, class: "d-flex" do %>
-            <input name="q" value="<%= params[:q] %>" class="form-control me-2" placeholder="Search...">
-            <button class="btn btn-outline-light">Search</button>
-          <% end %>
-        </div>
-      </div>
-    </nav>
+        <ul class="navbar-nav flex-row ms-4">
+          <li class="nav-item"><%= link_to "Universities", universities_path, class: "nav-link text-light px-2" %></li>
+          <li class="nav-item"><%= link_to "Programs", programs_path, class: "nav-link text-light px-2" %></li>
+          <li class="nav-item"><%= link_to "Departments", departments_path, class: "nav-link text-light px-2" %></li>
+          <li class="nav-item"><%= link_to "About", about_path, class: "nav-link text-light px-2" %></li>
+        </ul>
+
+        <%= form_with url: universities_path, method: :get, local: true, class: "d-flex ms-auto" do %>
+          <%= text_field_tag :q, params[:q], placeholder: "Search...", class: "form-control me-2" %>
+          <%= submit_tag "Search", class: "btn btn-outline-light" %>
+        <% end %>
+      </nav>
+
 
     <div class="container my-4">
       <%= yield %>

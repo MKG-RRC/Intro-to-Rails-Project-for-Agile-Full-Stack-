@@ -1,15 +1,45 @@
-<h2>Dataset Description (1.1)</h2>
-<p>
-  This application uses the <strong>Faker gem</strong> to generate data for three tables:
-  <em>Universities</em>, <em>Programs</em>, and <em>Departments</em>.
-  Each University has many Programs and many Departments.
-</p>
+<div class="container py-4">
+  <h1>About UniCatalog</h1>
+  <p class="lead">
+    UniCatalog is a Rails-based web application designed to catalog universities, their programs, departments, and instructors.
+  </p>
 
-<h2>Database ERD (1.2)</h2>
-<p>
-  The ERD below shows two one-to-many relationships:
-  University → Programs and University → Departments.
-</p>
-<%= image_tag "erd.png", alt: "Updated ERD Diagram", class: "img-fluid border rounded shadow-sm" %>
+  <hr>
+
+  <h2>Data Sources</h2>
+  <p>
+    The dataset for this project was generated using the <strong>Faker gem</strong>,
+    which acts as my primary data source. Faker produces randomized yet realistic values
+    for university names, academic programs, department subjects, instructor names, and email addresses.
+  </p>
+  <p>
+    The data is seeded automatically through the <code>db/seeds.rb</code> file, which populates
+    over 300 records across four tables:
+    <ul>
+      <li>Universities</li>
+      <li>Programs</li>
+      <li>Departments</li>
+      <li>Instructors</li>
+    </ul>
+  </p>
+
+  <p>
+    All relationships follow the one-to-many and many-to-many associations defined in the ERD diagram below.
+  </p>
+
+  <h2 class="mt-4">Entity Relationship Diagram</h2>
+  <p>
+    The diagram below shows the database schema, where one University has many Programs and Departments,
+    and Programs and Instructors share a many-to-many relationship.
+  </p>
+  <%= image_tag "erd.png", alt: "ERD Diagram", class: "img-fluid border rounded shadow-sm my-3" %>
+
+  <hr>
+
+  <p class="text-muted small">
+    Built by <strong>Mark Kenneth Garcia</strong> for the Intro to Rails Project.
+  </p>
+</div>
+
 <%= image_tag "erd.drawioo.drawio (1).png", alt: "Updated ERD Diagram", class: "img-fluid border rounded shadow-sm" %>
 

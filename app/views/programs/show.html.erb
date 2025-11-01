@@ -1,16 +1,13 @@
 <h1><%= @program.name %></h1>
 <p><%= @program.description %></p>
 
-<h3>University:</h3>
-<p><%= link_to @program.university.name, @program.university %></p>
+<p><strong>University:</strong> <%= link_to @program.university.name, @program.university %></p>
 
-<h3>Instructors:</h3>
-<% if @program.instructors.any? %>
-  <ul class="list-group">
-    <% @program.instructors.each do |i| %>
-      <li class="list-group-item"><%= i.name %> (<%= i.email %>)</li>
-    <% end %>
-  </ul>
-<% else %>
-  <div class="alert alert-warning">No instructors assigned.</div>
-<% end %>
+<h3>Instructors</h3>
+<ul>
+  <% @program.instructors.each do |i| %>
+    <li><%= i.name %> (<%= i.email %>)</li>
+  <% end %>
+</ul>
+
+<%= link_to "Back to #{@program.university.name}", @program.university, class: "btn btn-outline-dark mt-3" %>
