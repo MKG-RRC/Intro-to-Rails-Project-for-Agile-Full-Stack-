@@ -18,7 +18,9 @@
           <ul class="navbar-nav me-auto">
             <li class="nav-item"><%= link_to "Universities", universities_path, class: "nav-link" %></li>
             <li class="nav-item"><%= link_to "Programs", programs_path, class: "nav-link" %></li>
+            <li class="nav-item"><%= link_to "Departments", departments_path, class: "nav-link" %></li>
             <li class="nav-item"><%= link_to "About", about_path, class: "nav-link" %></li>
+
           </ul>
           <%= form_with url: universities_path, method: :get, local: true, class: "d-flex" do %>
             <input name="q" value="<%= params[:q] %>" class="form-control me-2" placeholder="Search...">

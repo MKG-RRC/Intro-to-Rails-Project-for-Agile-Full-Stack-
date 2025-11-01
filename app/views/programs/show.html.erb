@@ -1,10 +1,16 @@
-<p style="color: green"><%= notice %></p>
+<h1><%= @program.name %></h1>
+<p><%= @program.description %></p>
 
-<%= render @program %>
+<h3>University:</h3>
+<p><%= link_to @program.university.name, @program.university %></p>
 
-<div>
-  <%= link_to "Edit this program", edit_program_path(@program) %> |
-  <%= link_to "Back to programs", programs_path %>
-
-  <%= button_to "Destroy this program", @program, method: :delete %>
-</div>
+<h3>Instructors:</h3>
+<% if @program.instructors.any? %>
+  <ul class="list-group">
+    <% @program.instructors.each do |i| %>
+      <li class="list-group-item"><%= i.name %> (<%= i.email %>)</li>
+    <% end %>
+  </ul>
+<% else %>
+  <div class="alert alert-warning">No instructors assigned.</div>
+<% end %>

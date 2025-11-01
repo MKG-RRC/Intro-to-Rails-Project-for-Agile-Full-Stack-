@@ -1,10 +1,11 @@
-<h3 class="mt-4">Departments</h3>
-<% if @university.departments.any? %>
+<h3 class="mt-4">Instructors teaching at this University</h3>
+<% instructors = @university.programs.flat_map(&:instructors).uniq %>
+<% if instructors.any? %>
   <ul class="list-group">
-    <% @university.departments.each do |d| %>
-      <li class="list-group-item"><%= d.name %></li>
+    <% instructors.each do |inst| %>
+      <li class="list-group-item"><%= inst.name %> (<%= inst.email %>)</li>
     <% end %>
   </ul>
 <% else %>
-  <div class="alert alert-warning">No departments found for this university.</div>
+  <div class="alert alert-info">No instructors found for this university.</div>
 <% end %>

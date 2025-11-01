@@ -16,6 +16,7 @@ gem "puma", ">= 5.0"
 
 # Gemfile added:
 gem "faker"
+gem "rails-erd"
 
 gem "kaminari"
 # Use JavaScript with ESM import maps [https://github.com/rails/importmap-rails]

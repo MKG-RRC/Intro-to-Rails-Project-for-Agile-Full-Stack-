@@ -1,0 +1,25 @@
+<h1>Departments</h1>
+
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>University</th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @departments.each do |d| %>
+      <tr>
+        <td><%= link_to d.name, d %></td>
+        <td><%= link_to d.university.name, d.university %></td>
+        <td class="text-end">
+          <%= link_to "Edit", edit_department_path(d), class: "btn btn-sm btn-outline-secondary" %>
+          <%= link_to "Delete", d, method: :delete, data: { confirm: "Are you sure?" }, class: "btn btn-sm btn-danger" %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<%= link_to "New Department", new_department_path, class: "btn btn-primary" %>
