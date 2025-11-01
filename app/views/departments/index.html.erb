@@ -23,3 +23,8 @@
 </table>
 
 <%= link_to "New Department", new_department_path, class: "btn btn-primary" %>
+
+<div class="mt-4 d-flex justify-content-center">
+  <%= paginate @departments %>
+</div>
+

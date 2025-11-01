@@ -3,8 +3,9 @@ class DepartmentsController < ApplicationController
 
   # GET /departments
   def index
-    @departments = Department.includes(:university).order(:name)
+    @departments = Department.includes(:university).order(:name).page(params[:page]).per(10)
   end
+
 
   # GET /departments/1
   def show

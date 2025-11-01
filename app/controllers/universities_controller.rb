@@ -3,7 +3,9 @@ class UniversitiesController < ApplicationController
 
   # GET /universities or /universities.json
   def index
-    @universities = University.all
+      @universities = University.all
+      @universities = @universities.where("name LIKE ?", "%#{params[:q]}%") if params[:q].present?
+      @universities = @universities.order(:name).page(params[:page]).per(10)
   end
 
   # GET /universities/1 or /universities/1.json

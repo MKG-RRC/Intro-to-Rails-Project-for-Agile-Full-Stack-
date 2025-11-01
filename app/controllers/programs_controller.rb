@@ -3,8 +3,9 @@ class ProgramsController < ApplicationController
 
   # GET /programs or /programs.json
   def index
-    @programs = Program.all
+    @programs = Program.includes(:university).order(:name).page(params[:page]).per(10)
   end
+
 
   # GET /programs/1 or /programs/1.json
   def show
