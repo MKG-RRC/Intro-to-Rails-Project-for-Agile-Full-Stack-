@@ -182,9 +182,6 @@ in `.env`.
 - Dataset generated with Faker gem
 - Map visualization via Mapbox API
 
-## 🧾 License
-
-MIT License (Free to use and modify)
 
 ## 👨‍💻 Author
 
