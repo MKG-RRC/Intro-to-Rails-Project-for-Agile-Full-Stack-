@@ -16,6 +16,8 @@ gem "puma", ">= 5.0"
 
 # Gemfile added:
 gem "faker"
+
+# Gemfile for erd diagram
 gem "rails-erd"
 
 
